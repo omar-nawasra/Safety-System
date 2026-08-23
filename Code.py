@@ -11,11 +11,11 @@ import adafruit_mpu6050
 
 i2c = busio.I2C(board.SCL, board.SDA)
 mpu = adafruit_mpu6050.MPU6050(i2c)
-us = DistanceSensor(echo=17, trigger=4)
-ir = LineSensor(5)
-buzzer = Buzzer(18)
-led = LED(27)
-button = Button(22)
+us = DistanceSensor(echo=18, trigger=17)
+ir = LineSensor(4)
+buzzer = Buzzer(5)
+led = LED(23)
+button = Button(6)
 
 system_armed = False
 
