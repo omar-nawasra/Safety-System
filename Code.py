@@ -16,6 +16,7 @@ ir = LineSensor(5)
 buzzer = Buzzer(18)
 led = LED(27)
 button = Button(22)
+
 system_armed = False
 
 while True:
@@ -34,6 +35,9 @@ while True:
     if system_armed == True:
         ax, ay, az = mpu.acceleration
         magnitude = math.sqrt(ax**2 + ay**2 + az**2)
+        
+        print(f"Ultrasonic: {us.distance:.2f}m")
+        print(f"IR Sensor: {ir.line_detected}")
 
         if us.distance < 2.0:
             if magnitude > 20.0:  
