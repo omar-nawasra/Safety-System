@@ -57,9 +57,4 @@ while True:
 
     time.sleep(0.1)
 
-<<<<<<< HEAD
-    
-=======
-            
-        
->>>>>>> de48be1c57c5fdbeab348797f8fbc835990c4b99
+
