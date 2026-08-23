@@ -3,14 +3,11 @@ from gpiozero import Button
 from gpiozero import Buzzer 
 from gpiozero import LineSensor
 from gpiozero import DistanceSensor
+from mpu6050 import mpu6050
 import time
 import math
-import board
-import busio
-import adafruit_mpu6050
 
-i2c = busio.I2C(board.SCL, board.SDA)
-mpu = adafruit_mpu6050.MPU6050(i2c)
+mpu = mpu6050(0x68)
 us = DistanceSensor(echo=18, trigger=17)
 ir = LineSensor(4)
 buzzer = Buzzer(5)
@@ -33,11 +30,16 @@ while True:
         time.sleep(0.5) 
         
     if system_armed == True:
-        ax, ay, az = mpu.acceleration
+        accel_data = mpu.get_accel_data()
+        ax = accel_data['x']
+        ay = accel_data['y']
+        az = accel_data['z']
+        
         magnitude = math.sqrt(ax**2 + ay**2 + az**2)
         
         print(f"Ultrasonic: {us.distance:.2f}m")
         print(f"IR Sensor: {ir.line_detected}")
+        print(f"IMU Magnitude: {magnitude:.2f}")
 
         if us.distance < 2.0:
             if magnitude > 20.0:  
